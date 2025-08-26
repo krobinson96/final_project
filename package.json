@@ -4,6 +4,6 @@
   },
   "scripts": {
     "predeploy": "npm run",
-    "deploy": "gh-pages -d run"
+    "deploy": "gh-pages -d templates"
 }
 }

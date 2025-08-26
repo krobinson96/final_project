@@ -1,7 +1,6 @@
 ''' Import Flask and its dependecies along with the Emotion Detector
 function from the EmotionDetection package'''
 from flask import Flask, render_template, request
-
 from EmotionDetection.emotion_detection import emotion_detector
 
 app = Flask("Emotion Detection")
@@ -27,7 +26,7 @@ def sent_detector():
     sadness = response['sadness']
     dominant_emotion = response['dominant_emotion']
     # pylint: disable=E1101
-    if response.status_code == 400:
+    if response.get('code') == 400:
         anger = disgust = fear = joy = sadness = None
     if dominant_emotion is None:
         dominant_emotion = 'Invalid text! Please try again!'
@@ -36,7 +35,6 @@ def sent_detector():
     {sadness}. The Dominant emotion is {dominant_emotion}."""
 
 @app.route("/")
-
 def render_index_page():
     '''
     The default method for GET requests to the main endpoint
@@ -51,4 +49,4 @@ def render_index_page():
     return render_template('index.html')
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=4000)
